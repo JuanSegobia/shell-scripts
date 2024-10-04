@@ -1,0 +1,20 @@
+#!/bin/sh
+# Verifica si se pasó exactamente 1 argumento
+if [ $# -ne 1 ]; then
+    echo "error en la cantidad de parametros ingresados"
+    exit 1
+fi
+
+# Obtiene los nombres de usuario del archivo /etc/passwd
+users=($(cut -d: -f1 /etc/passwd))
+
+# Recorre cada usuario
+for row in $(cat /etc/passwd); do
+	name=$(echo $row | cut -d: -f1)
+	home=$(echo $row | cut -d: -f6)
+   	# Usa find para listar archivos del usuario y grep para filtrar por extensión
+    	quantity=$(find $home -type f 2>/dev/null | grep "\.$1$" | wc -l)
+    
+# Escribe el resultado en reporte.txt
+    echo "$name $quantity" >> reporte.txt
+done

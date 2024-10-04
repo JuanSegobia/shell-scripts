@@ -1,0 +1,33 @@
+if [ $# -ne 0 ]; then
+	echo "No se deben ingresar parametros"
+	exit 1
+fi
+
+mostrarMenu() {
+	echo "MENU DE COMANDOS"
+	echo "18. Ejercicio 18"
+	echo "12. Evaluar Expresiones"
+	echo "13. Probar estructuras de control"
+	echo "00. Salir"
+	echo "Ingrese la opcion a ejecutar: "
+}
+
+while true; do
+mostrarMenu
+read opcion
+
+case $opcion in 
+	18)
+		cat ej18
+	;;
+	12)
+		echo "Evaluar Expresiones"
+	;;
+	00)
+		exit 0
+	;;
+	*)
+		echo "OtraCosa"
+	;;
+esac
+done

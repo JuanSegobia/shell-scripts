@@ -1,0 +1,14 @@
+if [ $# -ne 1 ]; then
+	echo "Cantidad de parametros ingresada no valida"
+	exit 1
+fi
+
+usuario=$1
+
+while true; do
+	if who | grep -q "^$usuario\b"; then
+		echo "El usuario se logueo"
+		exit 0	
+ 	fi
+	sleep 10
+done

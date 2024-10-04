@@ -1,0 +1,31 @@
+if [ $# -ne 3 ]; then
+	echo "Cantidad de parametros no valida"
+	exit 1
+fi
+
+if [ ! -d $1 ]; then
+	echo "El directorio pasado como ($1) no existe"
+	exit 2
+fi
+
+if [ "$2" != "-a" ] && [ "$2" != "-b" ]; then
+	echo "El parametro ($2) no es valido"
+	echo "Deberia ser -a o -b"
+	exit 3
+fi
+
+pushd $1
+for archivo in $(ls); do
+	if [ ! -f $archivo ]; then
+		continue
+	fi
+	
+	if [ "$2" = "-a" ]; then
+		mv $archivo $archivo$3
+	else
+		mv $archivo $3$archivo
+	fi
+done
+popd
+
+	

@@ -1,0 +1,47 @@
+if [ $# -ne 0 ]; then 
+	echo "No se precisa ingresar parametros"
+	exit 1
+fi
+ mostrarOpciones (){
+	echo "___________________________________________________"
+	echo "|1. push: Recibe un parametro y lo agrega a la pila|"
+	echo "|2. pop: Saca elemento de la pila                  |" 
+	echo "|3. length: Devuelve la longitud de la pila        |"  
+	echo "|4. print: Imprime todos los elementos de la pila  |"
+	echo "----------------------------------------------------"
+	echo "Ingrese la opcion:"
+}
+arreglo=()
+
+while true; do
+	mostrarOpciones
+	read opcion
+		case $opcion in 
+			"1")
+				echo "Ingrese el parametro que quiere agregar a la pila"
+				read parametro
+				arreglo+=("$parametro")
+			;;
+			"2")
+				length=${#arreglo[@]}
+				if [ $length -gt 0 ]; then
+					unset arreglo[$((length - 1))]
+				else
+					echo "No hay mas elementos"
+				fi
+
+			;;
+			"3")
+				echo ${#arreglo[*]}
+			;;
+			"4")
+				echo ${arreglo[*]}
+			;;
+			"exit")
+				exit 0
+			;;
+			*)
+				echo "Opcion ingresada no valida"
+			;;
+		esac
+done

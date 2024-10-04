@@ -1,0 +1,17 @@
+if [ $# -ne 0 ]; then
+	echo "El script no precisa parametros"	
+	exit 1
+fi
+
+num=(10 3 2)
+
+productoria(){
+	length=${#num[@]}
+	total=1
+	for (( i=0; i<$length; i++ )); do
+		total=$((total * num[i])) 
+	done
+	echo "$total"
+}
+
+productoria

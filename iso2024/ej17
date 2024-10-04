@@ -1,0 +1,25 @@
+directorio="test"
+
+pushd $directorio
+for archivo in $(ls) ; do
+	echo "$archivo"
+	nuevoNombre=''
+
+	for (( i=0; i<${#archivo}; i++ )); do
+		letra="${archivo:i:1}"
+
+		if [[ "$letra" > 'A' && "$letra" < 'Z' ]]; then
+			nuevoNombre+=$(echo "$letra" | tr 'A-Z' 'a-z')
+			echo "$nuevoNombre"
+
+		elif [[ "$letra" > 'a' && "$letra" < 'z' ]]; then
+			nuevoNombre+=$(echo "$letra" | tr 'a-z' 'A-Z')
+			echo "$nuevoNombre"
+		
+		else 
+			nuevoNombre+="$letra"
+		fi
+	done
+	mv "$archivo" "$nuevoNombre"
+done
+popd%
