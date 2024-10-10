@@ -1,0 +1,22 @@
+if [ $# -ne 0 ]; then
+	echo "El script no precisa que se le ingresen parametros"
+	exit 1
+fi
+
+a1=( 10 10 10 10 )
+a2=( 1 2 3 4 )
+length=${#a1[@]}
+# Yo lo que haria es sacar el lenght pq supuestamente ambos terminan
+# en N por lo que tendrian el mismo largo e iteraria con un FOR en
+# ese rango
+
+i=0
+while true; do
+	total=`expr ${a1[$i]} + ${a2[$i]}`
+	echo " La suma de los elementos de la posicion $i es = $total"
+	i=$((i + 1))
+	if [ $i -eq ${#a1[@]} ]; then
+		break
+	fi
+done
+

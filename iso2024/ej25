@@ -1,0 +1,24 @@
+if [ $# -gt 2 ] || [ $# -eq 0 ]; then
+	echo "La cantidad de parametros ingresadas es invalida"
+fi
+
+arreglo=($(grep users $HOME/group | cut -d: -f4 | tr "," " "))
+ 
+case $1 in
+	"-b")
+		if [ ${#arreglo[@]} -gt $2 ]; then
+			echo ${arreglo[$2]}
+		else
+			echo "Error, no existe la posicion $2"
+		fi
+	;;	
+	"-l")
+		echo "${#arreglo[@]}"	
+	;;
+	"-i")
+		echo "${arreglo[@]}"
+	;;
+	*)
+		echo "El parametro ingresado es invalido"
+	;;
+esac

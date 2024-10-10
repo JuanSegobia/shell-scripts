@@ -1,0 +1,29 @@
+if [ $# -eq 0 ]; then
+	echo "La cantidad de parametros no es valida"
+	exit 1
+fi
+
+# Escriba un script que reciba una cantidad desconocida de parámetros al momento de su invocación.
+# Cada parámetro representa la ruta absoluta de un archivo o directorioe n el sistema.El script deberá iterar por todos los parámetros 
+# recibidos,y solo para aquellos parámetros que 
+# se encuentren en posiciones impares verificar si el archivo o directorio existen en el sistema, imprimiendo en pantalla que tipo
+# de objeto es (archivo o directorio). Además, deberá informar la cantidad de archivos o directorios inexistentes en el sistema.
+
+arreglo=($*)
+contador=0
+
+echo ${arreglo[@]}
+
+for ((i=1; i<${#arreglo[@]}; i+=2 )); do
+	if [ -e ${arreglo[$i]} ]; then 
+		if [ -d ${arreglo[$i]} ]; then
+			echo "Es Direct"
+		else
+			if [ -f ${arreglo[$i]} ]; then
+				echo "Es FIle"
+			fi
+		fi
+	else
+		contador=(contador + 1)
+	fi
+done
