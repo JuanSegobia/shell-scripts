@@ -1,0 +1,20 @@
+if [ $# -ne 0 ]; then
+	echo "Cantidad de parametros no valida"
+	exit 1
+fi
+
+arrelgo=()
+for archivo in $(ls $HOME/*.doc); do
+	echo $archivo
+	name=$(echo "$archivo" | cut -d'/' -f4)
+	arreglo+=("$name")
+done
+
+echo ${arreglo[@]}
+
+echo "Seleccione una de las 3 opciones"
+echo "1. verArchivo"
+echo "2. cantidadArchivos"
+echo "3. borrarArchivo"
+read funcion
+ 
