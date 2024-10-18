@@ -1,0 +1,15 @@
+if [ $# -ne 0 ]; then
+	echo "La cantidad de parametros ingresada no es adecuada"
+	exit 1
+fi
+
+contador=0
+ejecutables=$(ls | grep "\.exe")
+
+for a in ${ejecutables[@]}; do
+	echo "El archivo actual es $a"
+	mv ./$a ~/bin
+	contador=$((contador + 1))
+done
+
+echo "$contador"
