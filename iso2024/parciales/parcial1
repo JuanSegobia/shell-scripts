@@ -1,0 +1,24 @@
+dir="/var/log"
+
+if [ "$#" -lt 2 ]; then
+	echo "La cantidad de paramtros debe ser al menos de 2"
+	exit 1
+fi
+
+archivoFecha="$dir/access.$1.log"
+
+
+if [ -e "$archivoFecha" ]; then
+	count=0
+	for i in $@; do
+		((count++))
+		if [ "$count" -eq 1 ]; then 
+			continue
+		fi
+		ocurrencias=$(cat "$archivoFecha" | grep "$i" | wc -l)
+		echo "$i $ocurrencias"
+	done
+else
+	echo "La fecha no existe"
+	exit 2
+fi

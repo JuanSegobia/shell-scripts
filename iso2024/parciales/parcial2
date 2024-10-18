@@ -1,0 +1,64 @@
+arreglo=()
+
+if [[ "$#" -lt 3 || "$#" -gt 4 ]]; then
+	echo "la cantidad de parametros ingresada no es valida"
+	exit 1
+fi
+
+validacionRuta() {
+	if [ -e "$1" ]; then
+		return 0
+	else
+		exit 3
+	fi
+}
+
+agregarArchivos() {
+	for a in $(ls "$1"); do
+		arreglo+=("$a")
+	done
+}
+
+funcionA() {
+for a in $(ls "$1"); do
+	arreglo+=("$a")	
+done
+}
+
+borrarFileSystem() {
+	ruta="$1"
+	patron="$2"
+	for a in $(ls $ruta); do
+		if [ $patron in $a ]; then
+			rm
+		fi 
+ }
+
+validacionRuta "$1"
+agregarArchivos "$1"
+
+case $2 in 
+	"-a")
+		validacionRuta "$3"
+		funcionA "$3"
+		
+	;;
+	"-d")
+		if [ "$#" -eq 4 ]; then
+			if [ "$4" = "-f" ]; then 
+				borrarFileSystem "$1" "$3"
+			else
+				echo "El parametro ingresado no es correcto. Es necesario '-f'"
+				exit 10
+			fi
+		else 
+			validarPatron
+		fi
+	;;
+	*)
+		echo "El segundo parametro ingresado no es valido. Ingresar '-d' o  '-a'"
+		exit 2
+	;;
+esac	
+
+echo "${arreglo[@]}"
