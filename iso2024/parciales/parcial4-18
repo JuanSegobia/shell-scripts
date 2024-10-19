@@ -1,0 +1,45 @@
+directorio=/var/log
+
+arreglo=()
+
+for a in "$directorio"/*; do
+	if [ -f "$a" ]; then 
+		tiene=$(grep "access" "$a")
+		if [ -n "$tiene" ]; then
+			arreglo+=("$a")
+		fi
+	fi
+done
+
+eliminarDelArreglo() {
+	if [ "$1" -gt ${#arreglo[@]} ]; then
+		echo "el indice ingresado es incorrecto"
+		exit 2
+	fi
+
+	unset arreglo[$1]
+
+	if [ "$2" = "f" ]; then
+				
+}
+		
+select opcion in listar cantidad eliminar fin ; do
+case
+	"listar")
+		echo "${arreglo[@]}"
+	;;
+	"cantidad")
+		echo "${#arreglo[@]}"
+	;;
+	"eliminar")
+		echo "Ingrese un indice del arrelgo"
+		read indice
+		echo "Ingrese f o l"
+		read forma
+		eliminarDelArreglo "$indice" "$forma"
+	;;
+	"fin")
+
+	;;
+esac
+	

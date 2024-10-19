@@ -1,0 +1,25 @@
+if [ "$#" -ne 1 ]; then
+	echo "La cantidad de parametros ingresada no es correcta"
+	exit 3
+fi
+
+count=0
+user=$1
+
+existe=$(cat /etc/passwd | cut -d: -f1 | grep -w "$user")
+
+if [ -n "$existe" ]; then
+	while (( count<2 )); do
+		logueado=$(who | grep -w "$user")
+		if [ -n "$logueado" ]; then
+			echo "$1 $(date)" >> /var/log/access-$1.log
+		fi
+		echo "Esperando"
+		sleep 3
+	done
+	exit 0
+else
+	echo "El usuario no existe"
+	exit 1
+fi
+
