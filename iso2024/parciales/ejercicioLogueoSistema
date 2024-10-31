@@ -1,0 +1,11 @@
+usuario=$1
+
+while true; do
+	if who | grep -q "^$usuario\b"; then
+		echo "El usuario se logueo"
+		fecha=($(who | grep "$1" | cut -d ' ' -f3 
+		echo "$1" "$fecha" >> /var/log/usuarios.log
+ 		exit 0
+ 	fi
+	sleep 5
+done
