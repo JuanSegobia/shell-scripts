@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+	echo "cantidad de parametros no valida"
+	exit 1
+fi
+
+cont=0
+
+for parametro in "$@"; do
+	if [ -f "$parametro" ]; then
+		gzip "$parametro"
+	elif [ -d "$parametro" ]; then
+		if [ -r "$parametro" ]; then 
+			tar -cvzf archivo.tar.gz "$parametro"
+		elif [ -w "$parametro" ]; then
+			rmdir -r "$parametro"
+		fi
+	else
+		((cont ++)) 
+	fi
+done
+echo "$cont"

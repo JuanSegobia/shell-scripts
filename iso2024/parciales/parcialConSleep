@@ -1,0 +1,15 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+	echo "Cantidada de parametros ingresada no es valida"
+	exit 1
+fi
+
+
+
+while true; do
+	if  who | cut -d' ' -f1 | grep -q "$1"]; then
+		echo "$1" $(who | cut -d' ' -f3 -f4) >> /var/log/usuarios.log 	 
+		exit 0
+	fi
+	sleep 5
+done

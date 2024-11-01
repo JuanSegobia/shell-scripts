@@ -1,0 +1,20 @@
+
+if [ $# -ne 0 ]; then
+	echo "Cantidad de parametros ingresada no es valida"
+	exit 1
+fi
+
+directorio=$(ls)
+arreglo=()
+
+for a in $directorio; do
+    if [ -f "$a" ]; then
+        arreglo+=("$a") # Agrega el archivo al arreglo
+    fi
+done
+
+echo "${arreglo[@]}"
+
+
+
+exit 0 
