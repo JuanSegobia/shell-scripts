@@ -1,0 +1,18 @@
+
+
+if $(cat /etc/passwd | grep -q "$1"); then
+	cantLogueos=0
+	while true; do 
+		if who | grep "$1" ; then
+			echo "$1" $(who | cut -d' ' -f3 -f4) >> /var/log/"$1".log		
+			((cantLogueos ++))
+		fi
+		if [ $cantLogueos -eq 30 ]; then
+			exit 0
+		fi
+	done
+else
+	echo "el usuario no existe"
+	exit 1
+fi
+

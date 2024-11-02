@@ -1,0 +1,16 @@
+if [ $# -lt 1]; then
+	echo "Cantidad de parametros ingresada no es valida"
+	EXIT 1 
+fi
+
+archivoFecha="/var/log/acces.$1.log"
+
+if [ -e "$archivoFecha" ]; then
+	for i in "${@:2}"; do
+		camtAccesos=$(cat $archivoFecha | grep $i | wc -l)
+		echo "$i $camtAccesos"
+	done
+else
+	exit 2
+fi
+	

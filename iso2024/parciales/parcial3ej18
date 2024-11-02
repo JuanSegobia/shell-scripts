@@ -1,0 +1,8 @@
+if [ $# - ne 0 ]; then
+	echo "cantidad de parametros ingresada no es valida"
+	exit 1
+fi
+
+array=$(ls /var/log | grep "acces")
+
+
